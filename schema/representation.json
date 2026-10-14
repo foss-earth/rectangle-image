@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/foss-earth/rectangle-image/schema/representation.json",
+  "title": "rectangle image representation, scene version 1",
+  "required": [
+    "id",
+    "role",
+    "projection",
+    "mimeType",
+    "encodedBytes",
+    "width",
+    "height",
+    "url"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "role": {
+      "const": "image",
+      "description": "The single representation of a rectangle photograph."
+    },
+    "projection": {
+      "const": "rectangle"
+    },
+    "mimeType": {
+      "enum": [
+        "image/jpeg",
+        "image/png"
+      ]
+    },
+    "encodedBytes": {
+      "$ref": "#/$defs/positiveInteger",
+      "description": "The image file's bytes."
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    },
+    "width": {
+      "$ref": "#/$defs/positiveInteger",
+      "description": "Texels across, x right from the top-left corner."
+    },
+    "height": {
+      "$ref": "#/$defs/positiveInteger",
+      "description": "Texels down, y down from the top-left corner."
+    },
+    "url": {
+      "$ref": "#/$defs/url"
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$",
+      "description": "Case-sensitive ASCII, unique in its scope."
+    },
+    "positiveInteger": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Namespaced data for later features. Never executed.",
+      "propertyNames": {
+        "$ref": "#/$defs/extensionKey"
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "extensionKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+(\\.[A-Za-z0-9_-]+)+$",
+      "description": "An owner, then a name: \"owner.name\"."
+    },
+    "url": {
+      "type": "string",
+      "minLength": 1,
+      "description": "http(s), absolute or relative to the manifest's final response URL; no credentials."
+    }
+  }
+}

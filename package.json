@@ -1,0 +1,78 @@
+{
+  "name": "@foss-earth/rectangle-image",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-only",
+  "description": "Rectangle photograph representation: records, pixel dimensions, plane and texture coordinates, estimates and loading through the host's image services",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foss-earth/rectangle-image.git"
+  },
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./core": {
+      "source": "./src/core.ts",
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js"
+    },
+    "./browser": {
+      "source": "./src/browser/index.ts",
+      "types": "./dist/browser/index.d.ts",
+      "import": "./dist/browser/index.js"
+    },
+    "./babylon": {
+      "source": "./src/browser/babylon.ts",
+      "types": "./dist/browser/babylon.d.ts",
+      "import": "./dist/browser/babylon.js"
+    },
+    "./shaders": {
+      "source": "./src/shaders.ts",
+      "types": "./dist/shaders.d.ts",
+      "import": "./dist/shaders.js"
+    },
+    "./schema.json": "./schema/representation.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "LICENSE",
+    "README.md",
+    "NOTICE",
+    "docs",
+    "AGENTS.md"
+  ],
+  "dependencies": {
+    "@foss-earth/images": "0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.12.4",
+    "typescript": "5.9.3",
+    "vitest": "4.1.6",
+    "eslint": "9.39.4",
+    "typescript-eslint": "8.59.3",
+    "@foss-earth/renderer": "0.1.0"
+  },
+  "peerDependencies": {
+    "@foss-earth/renderer": "0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@foss-earth/renderer": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit --tsBuildInfoFile node_modules/.tmp/typecheck.tsbuildinfo",
+    "lint": "eslint . --cache --cache-strategy content --cache-location node_modules/.cache/eslint/",
+    "test": "vitest run --maxWorkers=50%",
+    "typecheck:consumer": "tsc -p tests/tsconfig.json --incremental --tsBuildInfoFile node_modules/.tmp/consumer.tsbuildinfo",
+    "ci": "npm run check:implementation",
+    "check:implementation": "npm run typecheck && npm run lint && npm test && npm run build && npm run typecheck:consumer"
+  }
+}

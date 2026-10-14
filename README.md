@@ -13,8 +13,8 @@ handling, device, scene, scheduler or cache.
 - Rectangle records, coordinates, estimates, loading and shader fragments: this package.
 - Common codecs, color and orientation checks, the broker and file services:
   [images](https://github.com/foss-earth/images).
-- Viewing, cameras, comparison and input: [image-viewer](https://github.com/foss-earth/360)
-  (`@foss-earth/image-viewer`).
+- Viewing, cameras, comparison and input: [sphere-image](https://github.com/foss-earth/sphere-image)
+  (`@foss-earth/sphere-image`).
 - The optional Babylon adapter uses [renderer](https://github.com/foss-earth/renderer).
 
 ## Exports
